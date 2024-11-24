@@ -9,7 +9,6 @@
                     <label>
                         <input type="radio" wire:model="userAnswer" value={{ $answer['id'] }} />
                         {{ $answer['answer'] }}
-                        {{ $answer['id'] }}
                     </label>
                 </li>
             @endforeach
