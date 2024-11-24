@@ -38,8 +38,8 @@ class Theme extends Model
     public function toDomainEntity(): ThemeEntity
     {
         return new ThemeEntity(
+            $this->id,
             $this->name,
-            $this->id
         );
     }
 }

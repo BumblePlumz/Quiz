@@ -70,7 +70,8 @@ class Question extends Model
         return new QuestionEntity(
             $this->question,
             $this->difficulty,
-            $answers
+            $answers,
+            $this->id,
         );
     }
 }
