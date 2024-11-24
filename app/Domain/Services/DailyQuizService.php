@@ -25,7 +25,7 @@ class DailyQuizService implements DailyQuizInterface
         $difficulty = 'facile';
 
         // Récupérer le theme de la bd
-        $theme = $this->themeRepository->getThemeByName($themeName)->mapTheme();
+        $theme = $this->themeRepository->getThemeByName($themeName)->toDomainEntity();
 
         // Récupérer les questions de la bd
         $dailyQuestion = $this->questionRepository->getDailyQuestion($themeName);
@@ -35,10 +35,10 @@ class DailyQuizService implements DailyQuizInterface
 
         // Générer les objets de domaine
         // 5 Questions
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             // 4 Réponses (dont une correcte)
             $fourAnswers = [];
-            for($j = 0; $j < 4; $j++) {
+            for ($j = 0; $j < 4; $j++) {
                 $fourAnswers[] = new Answer($dailyQuestion[$i]['answers'][$j]['answer'], $dailyQuestion[$i]['answers'][$j]['is_correct'], $dailyQuestion[$i]['answers'][$j]['id']);
             }
             // Une Question
