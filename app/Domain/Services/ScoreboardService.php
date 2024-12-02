@@ -6,6 +6,7 @@ use App\Domain\Interfaces\ScoreboardInterface;
 use App\Domain\Repositories\ScoreboardRepository;
 use App\Domain\Entities\User;
 use App\Domain\Entities\Theme;
+use App\Domain\Entities\Scoreboard;
 
 class ScoreboardService implements ScoreboardInterface
 {
@@ -16,9 +17,10 @@ class ScoreboardService implements ScoreboardInterface
         return $this->scoreboardRepository->getScores();
     }
 
-    public function addScore(User $user, string $themeName, int $score): void
+    public function addScore(User $user, string $themeName, string $gameMode, int $score): void
     {
         $theme = new Theme(0, $themeName);
-        $this->scoreboardRepository->addScore($user, $theme, $score);
+        $scoreboard = new Scoreboard($user, $theme, $score, $gameMode);
+        $this->scoreboardRepository->addScore($scoreboard);
     }
 }

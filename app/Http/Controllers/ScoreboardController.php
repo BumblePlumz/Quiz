@@ -22,11 +22,12 @@ class ScoreboardController extends Controller
     {
         $request->validate([
             'theme' => 'required',
+            'gameMode' => 'required',
             'score' => 'required|integer',
         ]);
         $user = Auth::user();
         
-        $this->scoreboardInterface->addScore($user->id, $request->theme, $request->score);
+        $this->scoreboardInterface->addScore($user->id, $request->theme, $request->gameMode, $request->score);
 
         return response()->noContent();
     }

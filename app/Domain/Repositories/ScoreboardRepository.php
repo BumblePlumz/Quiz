@@ -2,11 +2,10 @@
 
 namespace App\Domain\Repositories;
 
-use App\Domain\Entities\User;
-use App\Domain\Entities\Theme;
+use App\Domain\Entities\Scoreboard;
 
 interface ScoreboardRepository
 {
     public function getScores(): array;
-    public function addScore(User $user, Theme $theme, int $score): void;
+    public function addScore(Scoreboard $scoreboard): void;
 }

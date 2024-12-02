@@ -10,7 +10,7 @@ class Scoreboard
 {
     private int $id;
 
-    public function __construct(private User $user, private Theme $theme, private int $score, int $id = null)	
+    public function __construct(private User $user, private Theme $theme, private int $score, private string $gameMode, int $id = null)	
     {
         $this->id = $id;
     }
