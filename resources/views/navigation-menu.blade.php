@@ -18,9 +18,6 @@
                     <x-nav-link href="{{ route('theme.show') }}" :active="request()->routeIs('theme.show')">
                         {{ __('Quiz Journalier') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('score') }}" :active="request()->routeIs('score')">
-                        {{ __('Score') }}
-                    </x-nav-link>
                 </div>
             </div>
 
