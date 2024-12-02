@@ -2,7 +2,7 @@
 
 namespace App\Domain\Services;
 
-use App\Domain\Repositories\ShowThemeInterface;
+use App\Domain\Interfaces\ShowThemeInterface;
 use App\Domain\Repositories\ThemeRepository;
 use App\Domain\Entities\Theme;
 
@@ -36,7 +36,6 @@ class ThemeService implements ShowThemeInterface
      */
     public function getThemeByName(string $themeName): Theme
     {
-        $theme = $this->themeRepository->getThemeByName($themeName)->toDomainEntity(); 
-        return $theme;
+        return $this->themeRepository->getThemeByName($themeName); 
     }
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Theme;
 
 class ThemeSeeder extends Seeder
 {
@@ -13,12 +13,16 @@ class ThemeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('themes')->insert([
-            ['name' => 'Nature'],
-            ['name' => 'Technology'],
-            ['name' => 'Art'],
-            ['name' => 'History'],
-            ['name' => 'Science'],
-        ]);
+        // Tableau de thèmes
+        $themes = [
+            ['name' => 'PHP'],
+            ['name' => 'JavaScript'],
+            ['name' => 'Python'],
+            ['name' => 'Java'],
+            ['name' => 'C#'],
+        ];
+
+        // Insertion de plusieurs thèmes
+        Theme::insert($themes);
     }
 }
