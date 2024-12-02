@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('welcome') }}">
                         <x-application-mark />
                     </a>
                 </div>
@@ -17,6 +17,9 @@
                     </x-nav-link>
                     <x-nav-link href="{{ route('theme.show') }}" :active="request()->routeIs('theme.show')">
                         {{ __('Quiz Journalier') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('score') }}" :active="request()->routeIs('score')">
+                        {{ __('Score') }}
                     </x-nav-link>
                 </div>
             </div>
