@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use App\Domain\Entities\User as UserEntity;
 
 class User extends Authenticatable
 {
@@ -68,15 +69,15 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get the user's profile photo URL attribute.
+/**
+     * The questions answered by the user.
      * 
      * @return BelongsToMany
      */
-    public function answered(): BelongsToMany
+    public function scoreboards(): BelongsToMany
     {
-        return $this->belongsToMany(Question::class, 'user_answers')
-            ->withPivot('answer_id')
+        return $this->belongsToMany(Scoreboard::class, 'scoreboards')
+            ->withPivot('score')
             ->withTimestamps();
     }
 
@@ -88,5 +89,24 @@ class User extends Authenticatable
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function toDomainEntity(): UserEntity
+    {
+        return new UserEntity(
+            $this->id,
+            $this->name,
+            $this->email,
+            $this->email_verified_at,
+            $this->password,
+            $this->twoFactorSecret,
+            $this->twoFactorRecoveryCodes,
+            $this->twoFactorConfirmedAt,
+            $this->remember_token,
+            $this->current_team_id,
+            $this->profile_photo_path,
+            $this->created_at,
+            $this->updated_at,
+        );
     }
 }

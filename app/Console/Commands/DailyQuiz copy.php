@@ -4,8 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
-use DateTime;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Theme;
@@ -17,27 +15,24 @@ class DailyQuiz extends Command
      *
      * @var string
      */
-    protected $signature = 'app:daily-quiz {theme} {difficulty} {--date=}';
+    protected $signature = 'app:daily-quiz {theme} {difficulty}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command to generate a daily quiz with a given theme and difficulty by a local API';
+    protected $description = 'Command description';
 
     private string $difficulty;
     private string $theme;
-    private bool $stream = false;
-    private float $temperature = 0.7;
-    private float $top_p = 0.9;
-    private string $format = 'json';
     private string $endpoint = 'http://localhost:11434/api/generate';
     private string $model = 'llama3.2';
-    private string $prompt = 'Chaque question doit inclure :
-    - Une seule question sous forme de chaîne de caractères.
-    - Quatre options de réponse sous forme de tableau de chaînes de caractères.
-    - L\'index (commençant à 0) de la réponse correcte.
+    private string $prompt = 'Each question should include:
+    - A single question as a string.
+    - Four answer options as an array of strings.
+    - The index (0-based) of the correct answer.
+
    
     Output the result in this JSON format:
     {
@@ -93,16 +88,18 @@ class DailyQuiz extends Command
         }
     }';
 
+    private bool $stream = false;
+    private string $temperature = "0.7";
+    private string $format = 'json';
+
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $date = $this->option('date') ? $this->option('date') : now()->format('Y-m-d');
         $this->difficulty = $this->argument('difficulty');
         $this->theme = $this->argument('theme');
-        $seed = Str::uuid();
-        $currentPrompt = "Génère un quiz à propos de {$this->theme} avec 5 questions {$this->difficulty}. {$this->prompt}";
+        $currentPrompt = "Create a quiz about {$this->theme} with 5 {$this->difficulty} questions. {$this->prompt}";
         try {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
@@ -111,9 +108,7 @@ class DailyQuiz extends Command
                 'prompt' => $currentPrompt,
                 'stream' => $this->stream,
                 'temperature' => $this->temperature,
-                'top_p' => $this->top_p,
                 'format' => $this->format,
-                'seed' => $seed,
             ]);
 
             if ($response->failed()) throw new \Exception('Failed to get the daily quiz');
@@ -127,16 +122,15 @@ class DailyQuiz extends Command
             // Décoder la chaîne JSON en un tableau associatif
             $data = json_decode($jsonString, true);
             $theme = Theme::where('name', 'PHP')->first();
-            foreach ($data as $questionData) {
+            foreach($data as $questionData) {
                 dump($questionData);
                 $question = Question::create([
                     'question' => $questionData['question'],
                     'difficulty' => 'medium',
                     'theme_id' => $theme->id,
-                    'generated_at' => $date,
                 ]);
                 $question->save();
-                for ($i = 0; $i < count($questionData['answers']); $i++) {
+                for($i = 0; $i < count($questionData['answers']); $i++) {
                     $isCorrect = 0;
                     if ($i == $questionData['correctAnswerIndex']) {
                         $isCorrect = 1;
@@ -145,7 +139,6 @@ class DailyQuiz extends Command
                         'question_id' => $question->id,
                         'answer' => $questionData['answers'][$i],
                         'is_correct' => $isCorrect,
-                        'generated_at' => $date,
                     ]);
                     $question->answers()->save($answer);
                 }

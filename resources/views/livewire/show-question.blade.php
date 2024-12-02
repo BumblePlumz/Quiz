@@ -1,6 +1,8 @@
 <div class="quiz-container">
     @if ($index < count($questions))
-        <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Question {{ $index + 1 }} sur
+        <h2 class="mb-4 text-xl font-bold">Question {{ $index + 1 }} sur {{ count($questions) }}</h2>
+        <p class="mb-6">{{ $questions[$index]['question'] }}</p>
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Question {{ $index + 1 }} sur
             {{ count($questions) }}</h2>
         <p class="mb-6 text-gray-900 dark:text-white">{{ $questions[$index]['question'] }}</p>
 
@@ -15,7 +17,7 @@
             @endforeach
         </ul>
 
-        <button wire:click="submitAnswer" class="px-4 py-2 bg-blue-500 text-white rounded">
+        <button wire:click="submitAnswer" class="px-4 py-2 text-white bg-blue-500 rounded">
             Valider
         </button>
     @else
@@ -44,7 +46,10 @@
                 </li>
             @endforeach
         </ul>
-        <a class="btnTheme text-center text-lg font-semibold p-4 shadow rounded-lg float-end mb-4 hover:bg-blue-500 hover:text-white text-gray-900 dark:text-blue-500 dark:bg-white"
+        <a class="p-4 mb-4 text-lg font-semibold text-center rounded-lg shadow btnTheme float-end hover:bg-blue-500 hover:text-white"
+        <a class="p-4 mb-4 text-lg font-semibold text-center text-gray-900 rounded-lg shadow btnTheme float-end hover:bg-blue-500 hover:text-white dark:text-blue-500 dark:bg-white"
             href="{{ route('theme.show') }}">Continuer</a>
     @endif
 </div>
+
+@vite(['resources/js/quiz/dailyQuiz.js'])
