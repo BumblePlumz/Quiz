@@ -3,7 +3,7 @@
 namespace App\Domain\Services;
 
 use App\Domain\Entities\DailyQuiz;
-use App\Domain\Repositories\DailyQuizInterface;
+use App\Domain\Interfaces\DailyQuizInterface;
 use App\Domain\Entities\Theme;
 use App\Domain\Entities\Question;
 use App\Domain\Entities\Answer;
@@ -25,7 +25,7 @@ class DailyQuizService implements DailyQuizInterface
         $difficulty = 'facile';
 
         // Récupérer le theme de la bd
-        $theme = $this->themeRepository->getThemeByName($themeName)->toDomainEntity();
+        $theme = $this->themeRepository->getThemeByName($themeName);
 
         // Récupérer les questions de la bd
         $dailyQuestion = $this->questionRepository->getDailyQuestion($themeName);

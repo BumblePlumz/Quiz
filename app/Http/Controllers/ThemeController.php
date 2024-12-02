@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Repositories\ShowThemeInterface;
+use App\Domain\Interfaces\ShowThemeInterface;
 
 class ThemeController extends Controller
 {
