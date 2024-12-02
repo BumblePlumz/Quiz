@@ -13,11 +13,12 @@
                         {{ __('Liste des Thèmes') }}
                     </h2> --}}
 
-                    <ul class="space-y-4 flex flex-col justify-center text-center">
+                    <ul class="flex flex-row justify-evenly text-center">
                         @foreach ($themes as $theme)
                             <li
-                                class="flex justify-center items-center max-w-[100px] mx-auto p-4 bg-white shadow rounded-lg dark:bg-gray-800 dark:text-white">
-                                <button id={{ $theme['id'] }} data-name={{ $theme['name'] }} class="btnTheme text-center text-lg font-semibold">
+                                class="flex justify-center items-center max-w-[100px] bg-white shadow rounded-lg dark:bg-gray-800 dark:text-white hover:bg-blue-500 hover:text-white">
+                                <button id={{ $theme['id'] }} data-name={{ $theme['name'] }}
+                                    class="btnTheme text-center text-lg font-semibold p-4">
                                     {{ $theme['name'] }}
                                 </button>
                             </li>
