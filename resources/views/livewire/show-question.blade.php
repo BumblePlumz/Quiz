@@ -2,8 +2,11 @@
     @if ($index < count($questions))
         <h2 class="mb-4 text-xl font-bold">Question {{ $index + 1 }} sur {{ count($questions) }}</h2>
         <p class="mb-6">{{ $questions[$index]['question'] }}</p>
+        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Question {{ $index + 1 }} sur
+            {{ count($questions) }}</h2>
+        <p class="mb-6 text-gray-900 dark:text-white">{{ $questions[$index]['question'] }}</p>
 
-        <ul class="mb-6">
+        <ul class="mb-6 text-gray-900 dark:text-white">
             @foreach ($questions[$index]['answers'] as $answer)
                 <li wirekey:={{ $answer['id'] }} class="mb-2">
                     <label>
@@ -18,9 +21,9 @@
             Valider
         </button>
     @else
-        <h2 class="text-2xl font-bold">Félicitations !</h2>
-        <p>Vous avez terminé le quiz avec {{ $score }}/5</p>
-        <ul class="mt-6">
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Félicitations !</h2>
+        <p class="text-gray-900 dark:text-white">Vous avez terminé le quiz avec {{ $score }}/5</p>
+        <ul class="mt-6 text-gray-900 dark:text-white">
             @foreach ($this->questions as $question)
                 <li class="mb-4">
                     <h3 class="font-semibold">{{ $question['question'] }}</h3>
@@ -44,6 +47,7 @@
             @endforeach
         </ul>
         <a class="p-4 mb-4 text-lg font-semibold text-center rounded-lg shadow btnTheme float-end hover:bg-blue-500 hover:text-white"
+        <a class="p-4 mb-4 text-lg font-semibold text-center text-gray-900 rounded-lg shadow btnTheme float-end hover:bg-blue-500 hover:text-white dark:text-blue-500 dark:bg-white"
             href="{{ route('theme.show') }}">Continuer</a>
     @endif
 </div>
