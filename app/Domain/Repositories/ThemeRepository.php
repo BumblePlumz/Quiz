@@ -2,7 +2,7 @@
 
 namespace App\Domain\Repositories;
 
-use App\Models\Theme;
+use App\Domain\Entities\Theme;
 
 interface ThemeRepository
 {

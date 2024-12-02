@@ -3,23 +3,26 @@
 namespace App\Infrastructure;
 
 use App\Domain\Repositories\QuestionRepository;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use App\Models\Question;
 
-class EloquentQuestion 
+class EloquentQuestion implements QuestionRepository
 {
-    // implement the getDailyQuestion method
-    
-    public function getDailyQuestion($themeName): Collection
+    /**
+     * Get the daily question for a specific theme.
+     *
+     * @param string $themeName
+     * @return Collection
+     */
+    public function getDailyQuestion(string $themeName): array
     {
-        $dailyQuestion = DB::table('questions')
-            ->join('themes', 'questions.theme_id', '=', 'themes.id')
-            ->join('answers', 'questions.id', '=', 'answers.question_id')
-            ->select('questions.*', 'answers.*')
-            ->whereDate('questions.created_at', '=', \Carbon\Carbon::today())
-            ->where('themes.name', '=', $themeName)
+        $dailyQuestions = Question::with('answers') // Load the related answers
+            ->whereHas('theme', function ($query) use ($themeName) {
+                $query->where('name', '=', $themeName);
+            })
+            ->whereDate('created_at', now()->toDateString()) // Filter by today's date
             ->get();
-        
-        return $dailyQuestion;
+
+        return $dailyQuestions->toArray();
     }
 }

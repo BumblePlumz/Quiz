@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Domain\Repositories\DailyQuizInterface;
+use App\Domain\Interfaces\DailyQuizInterface;
 
 class ShowQuestion extends Component
 {
