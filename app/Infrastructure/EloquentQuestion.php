@@ -20,7 +20,7 @@ class EloquentQuestion implements QuestionRepository
             ->whereHas('theme', function ($query) use ($themeName) {
                 $query->where('name', '=', $themeName);
             })
-            ->whereDate('created_at', now()->toDateString()) // Filter by today's date
+            ->whereDate('generated_at', now()->toDateString()) // Filter by today's date
             ->get();
 
         return $dailyQuestions->toArray();

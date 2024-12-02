@@ -1,6 +1,6 @@
 <div class="quiz-container">
     @if ($index < count($questions))
-        <h2 class="text-xl font-bold mb-4">Question {{ $index + 1 }} sur {{ count($questions) }}</h2>
+        <h2 class="mb-4 text-xl font-bold">Question {{ $index + 1 }} sur {{ count($questions) }}</h2>
         <p class="mb-6">{{ $questions[$index]['question'] }}</p>
 
         <ul class="mb-6">
@@ -14,7 +14,7 @@
             @endforeach
         </ul>
 
-        <button wire:click="submitAnswer" class="px-4 py-2 bg-blue-500 text-white rounded">
+        <button wire:click="submitAnswer" class="px-4 py-2 text-white bg-blue-500 rounded">
             Valider
         </button>
     @else
@@ -43,7 +43,9 @@
                 </li>
             @endforeach
         </ul>
-        <a class="btnTheme text-center text-lg font-semibold p-4 shadow rounded-lg float-end mb-4 hover:bg-blue-500 hover:text-white"
+        <a class="p-4 mb-4 text-lg font-semibold text-center rounded-lg shadow btnTheme float-end hover:bg-blue-500 hover:text-white"
             href="{{ route('theme.show') }}">Continuer</a>
     @endif
 </div>
+
+@vite(['resources/js/quiz/dailyQuiz.js'])

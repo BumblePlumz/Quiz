@@ -11,6 +11,10 @@ use App\Domain\Repositories\QuestionRepository;
 use App\Infrastructure\EloquentQuestion;
 use App\Domain\Repositories\ThemeRepository;
 use App\Infrastructure\EloquentTheme;
+use App\Domain\Interfaces\ScoreboardInterface;
+use App\Domain\Services\ScoreboardService;
+use App\Domain\Repositories\ScoreboardRepository;
+use App\Infrastructure\EloquentScoreboard;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,10 +26,12 @@ class AppServiceProvider extends ServiceProvider
         // Domain
         $this->app->bind(DailyQuizInterface::class, DailyQuizService::class);
         $this->app->bind(ShowThemeInterface::class, ThemeService::class);
+        $this->app->bind(ScoreboardInterface::class, ScoreboardService::class);
 
         // Infrastructure
         $this->app->bind(QuestionRepository::class, EloquentQuestion::class);
         $this->app->bind(ThemeRepository::class, EloquentTheme::class);
+        $this->app->bind(ScoreboardRepository::class, EloquentScoreboard::class);
     }
 
     /**
