@@ -43,5 +43,7 @@
                 </li>
             @endforeach
         </ul>
+        <a class="btnTheme text-center text-lg font-semibold p-4 shadow rounded-lg float-end mb-4 hover:bg-blue-500 hover:text-white"
+            href="{{ route('theme.show') }}">Continuer</a>
     @endif
 </div>
