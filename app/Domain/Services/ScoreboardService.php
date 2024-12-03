@@ -12,11 +12,27 @@ class ScoreboardService implements ScoreboardInterface
 {
     public function __construct(private readonly ScoreboardRepository $scoreboardRepository) {}
 
+    /**
+     * @inheritDoc
+     */
     public function getScores(): array
     {
-        return $this->scoreboardRepository->getScores();
+        $result = [];
+        $scores = $this->scoreboardRepository->getScores();
+        foreach ($scores as $score) {
+            $text = $score->getGameMode() . ' (' . $score->getTheme()->getName() . ') : ' . $score->getScore() . '/5';
+            $result[] = [
+                'allDay' => true,
+                'start' => $score->getCreatedAt()->format('Y-m-d'),
+                'title' => $text,
+            ];
+        }
+        return $result;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function addScore(User $user, string $themeName, string $gameMode, int $score): void
     {
         $theme = new Theme(0, $themeName);

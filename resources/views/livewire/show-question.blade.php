@@ -1,7 +1,5 @@
 <div class="quiz-container">
     @if ($index < count($questions))
-        <h2 class="mb-4 text-xl font-bold">Question {{ $index + 1 }} sur {{ count($questions) }}</h2>
-        <p class="mb-6">{{ $questions[$index]['question'] }}</p>
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Question {{ $index + 1 }} sur
             {{ count($questions) }}</h2>
         <p class="mb-6 text-gray-900 dark:text-white">{{ $questions[$index]['question'] }}</p>

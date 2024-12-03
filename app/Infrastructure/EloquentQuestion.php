@@ -8,15 +8,13 @@ use App\Models\Question;
 
 class EloquentQuestion implements QuestionRepository
 {
+
     /**
-     * Get the daily question for a specific theme.
-     *
-     * @param string $themeName
-     * @return Collection
+     * @inheritDoc
      */
     public function getDailyQuestion(string $themeName): array
     {
-        $dailyQuestions = Question::with('answers') // Load the related answers
+        $dailyQuestions = Question::with('answers')
             ->whereHas('theme', function ($query) use ($themeName) {
                 $query->where('name', '=', $themeName);
             })

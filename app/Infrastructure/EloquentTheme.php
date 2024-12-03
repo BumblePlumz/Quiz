@@ -8,6 +8,9 @@ use App\Models\Theme;
 
 class EloquentTheme implements ThemeRepository
 {
+    /**
+     * @inheritDoc
+     */
     public function getThemes(): array
     {
         // Récupère tous les thèmes depuis Eloquent et les convertit en entités de domaine
@@ -16,6 +19,9 @@ class EloquentTheme implements ThemeRepository
             ->toArray();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getThemeByName(string $themeName): ThemeEntity
     {
         // Trouve un thème par nom et le convertit en entité de domaine
