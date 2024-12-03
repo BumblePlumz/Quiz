@@ -34,25 +34,32 @@ Suivez les étapes ci-dessous pour installer et exécuter l'application :
     ```
 
 5. Copier le fichier .env.exemple en .env  
-   Ensuite configurer le fichier avec une base de donnée valide.
+   Ensuite configurer le fichier avec une base de donnée valide.  
 
-6. Exécuter manuellement la commande pour générer un quiz  
+6. Effectuer les migrations sur la base de données  
+    ```bash  
+    php artisan migrate:fresh --seed  
+    ```  
+L'utilisateur de base est :  
+ - email : admin@ex.fr  
+ - password : password  
+
+7. Exécuter manuellement la commande pour générer un quiz  
     => app:daily-quiz {theme} {difficulté} --date='2024-12-2'  
-    `bash
-    php artisan app:daily-quiz PHP moyen
-    `  
+    ```bash
+    php artisan app:daily-quiz PHP moyen  
+    ```  
    NB: Assurez-vous d'avoir Ollama d'installer  
-    `bash
+    ```bash
     ollama run llama3.2
-    `
+    ```  
 
-7. Démarrez le serveur :
-
+8. Démarrez le serveur :
     ```bash
     php artisan serve
     ```
 
-8. Ouvrez votre navigateur et accédez à l'adresse suivante :
+9. Ouvrez votre navigateur et accédez à l'adresse suivante :
     ```
     http://localhost:8000
     ```
