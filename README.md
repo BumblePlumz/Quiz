@@ -18,6 +18,7 @@ Suivez les étapes ci-dessous pour installer et exécuter l'application :
 
 3. Installez les dépendances :
     ```bash
+    composer install
     npm install
     ```
 
@@ -26,12 +27,24 @@ Suivez les étapes ci-dessous pour installer et exécuter l'application :
     npm run build
     ```
 
-5. Démarrez le serveur :
+5. Copier le fichier .env.exemple en .env  
+Ensuite configurer le fichier avec une base de donnée valide.  
+
+6. Exécuter manuellement la commande pour générer un quiz 
+    ```bash
+    php artisan app:dailyquiz PHP moyen
+    ```
+NB: Assurez-vous d'avoir Ollama d'installer
+    ```bash
+    ollama run llama3.2
+    ```
+
+7. Démarrez le serveur :
     ```bash
     php artisan serve
     ```
 
-6. Ouvrez votre navigateur et accédez à l'adresse suivante :
+8. Ouvrez votre navigateur et accédez à l'adresse suivante :
     ```
     http://localhost:8000
     ```

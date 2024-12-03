@@ -10,6 +10,9 @@ use App\Models\Scoreboard;
 
 class EloquentScoreboard implements ScoreboardRepository
 {
+    /**
+     * @inheritDoc
+     */
     public function getScores(): array
     {
         return Scoreboard::all()->map(function ($scoreboard) {
@@ -17,19 +20,22 @@ class EloquentScoreboard implements ScoreboardRepository
         })->toArray();
     }
 
-    public function addScore(ScoreboardEntity $scoreboard): void
+    /**
+     * @inheritDoc
+     */
+    public function addScore(ScoreboardEntity $scoreboardEntity): void
     {
-        $user = User::find($scoreboard->getUser()->getId());
+        $user = User::find($scoreboardEntity->getUser()->getId());
         if (!$user) throw new \Exception('User not found');
 
-        $theme = Theme::where('name', $scoreboard->getTheme()->getName())->first();
+        $theme = Theme::where('name', $scoreboardEntity->getTheme()->getName())->first();
         if (!$theme) throw new \Exception('Theme not found');
 
         $scoreboard = new Scoreboard();
         $scoreboard->user_id = $user->id;
         $scoreboard->theme_id = $theme->id;
-        $scoreboard->game_mode = $scoreboard->getGameMode();
-        $scoreboard->score = $scoreboard->getScore();
+        $scoreboard->game_mode = $scoreboardEntity->getGameMode();
+        $scoreboard->score = $scoreboardEntity->getScore();
         $scoreboard->save();
     }
 }

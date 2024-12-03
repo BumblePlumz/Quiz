@@ -13,9 +13,7 @@ class ScoreboardController extends Controller
     // Display the specified score
     public function show()
     {
-        $user = Auth::user();
-        $scoreboards = $this->scoreboardInterface->getScores($user->id);
-        return view('scoreboard.show', compact('score'));
+        return view('scoreboard.show');
     }
 
     public function store(Request $request)

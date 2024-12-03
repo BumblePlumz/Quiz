@@ -16,7 +16,6 @@ class DailyQuizController extends Controller
     public function showQuestion(Request $request)
     {
         $themeName = $request->route('theme');
-        // $quiz = $this->dailyQuizInterface->getDailyQuiz($themeName);
         return view('dailyquiz.show', ['theme' => $themeName]);
     }
 }

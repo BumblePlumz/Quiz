@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('theme_id')->constrained('themes')->onDelete('cascade');
             $table->integer('score')->default(0);
+            $table->string('game_mode');
             $table->timestamps();
         });
     }

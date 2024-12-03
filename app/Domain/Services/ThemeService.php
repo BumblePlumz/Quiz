@@ -16,8 +16,7 @@ class ThemeService implements ShowThemeInterface
     public function __construct(private ThemeRepository $themeRepository) {}
 
     /**
-     * Get all themes.
-     * @return array
+     * @inheritDoc
      */
     public function getThemes(): array
     {
@@ -30,9 +29,7 @@ class ThemeService implements ShowThemeInterface
     }
 
     /**
-     * Get a theme by its name.
-     * @param string $themeName The name of the theme
-     * @return Theme
+     * @inheritDoc
      */
     public function getThemeByName(string $themeName): Theme
     {

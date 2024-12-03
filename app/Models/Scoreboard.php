@@ -43,8 +43,9 @@ class Scoreboard extends Model
         return new ScoreboardEntity(
             $this->user->toDomainEntity(),
             $this->theme->toDomainEntity(),
-            $this->gameMode->game_mode,
             $this->score,
+            $this->game_mode,
+            $this->created_at,
             $this->id,
         );
     }

@@ -26,6 +26,10 @@ class Theme
         return $this->name;
     }
 
+    /**
+     * format the object to an array.
+     * @return array
+     */
     public function toArray(): array
     {
         return [
